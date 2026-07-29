@@ -2,21 +2,19 @@
 FROM node:22-alpine AS build
 WORKDIR /app
 
-# Copiar archivos de dependencias e instalar
 COPY package*.json ./
 RUN npm ci
 
-# Copiar el código fuente y compilar
 COPY . .
 RUN npm run build
 
-# ETAPA 2: Servir los archivos estáticos con Nginx
+# ETAPA 2: Nginx
 FROM nginx:alpine
-# Copiar el build compilado al directorio de Nginx
-# (Si tu carpeta en dist tiene otro nombre, ajústalo aquí)
+
+# Copiamos el contenido directamente
 COPY --from=build /app/dist/CinemaUVEG/browser /usr/share/nginx/html
 
-# Copiar configuración personalizada de Nginx para el ruteo de Angular
+# Configuración de Nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
