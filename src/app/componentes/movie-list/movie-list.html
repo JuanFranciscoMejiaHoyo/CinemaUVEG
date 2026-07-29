@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="grid-movies">
+    <!-- OJO AQUÍ: pon 'movies()' con paréntesis para leer el arreglo del Signal -->
+    @for (movie of movies(); track movie.id) {
+      <div class="card">
+        <img 
+          [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" 
+          [alt]="movie.title" 
+        />
+        <div class="card-body">
+          <h3>{{ movie.title }}</h3>
+          <p class="rating">⭐ {{ movie.vote_average.toFixed(1) }}</p>
+          <a [routerLink]="['/movie', movie.id]" class="btn-detail">Ver detalle</a>
+        </div>
+      </div>
+    }
+  </div>
+</div>

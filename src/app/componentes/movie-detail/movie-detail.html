@@ -1,0 +1,21 @@
+<div class="container">
+  <a routerLink="/" class="btn-back">⬅ Volver al catálogo</a>
+
+  @if (movie(); as item) {
+    <div class="detail-card" style="margin-top: 20px;">
+      <img 
+        [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" 
+        [alt]="item.title" 
+      />
+      <div class="info">
+        <h2>{{ item.title }}</h2>
+        <p class="rating">⭐ {{ item.vote_average.toFixed(1) }} / 10</p>
+        <p><strong>Fecha de estreno:</strong> {{ item.release_date }}</p>
+        <p><strong>Sinopsis:</strong></p>
+        <p>{{ item.overview }}</p>
+      </div>
+    </div>
+  } @else {
+    <p style="margin-top: 20px;">Cargando detalle de la película...</p>
+  }
+</div>
