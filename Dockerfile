@@ -11,16 +11,14 @@ RUN npm run build
 # ETAPA 2: Nginx
 FROM nginx:alpine
 
-# 1. Borramos TODO el contenido por defecto de Nginx (incluido su index.html)
+# Limpieza
 RUN rm -rf /usr/share/nginx/html/*
-
-# 2. Borramos el archivo de conf por defecto
 RUN rm /etc/nginx/conf.d/default.conf
 
-# 3. Copiamos TU app compilada
-COPY --from=build /app/dist/CinemaUVEG /usr/share/nginx/html
+# COPIAR DESDE /browser PARA QUE EL index.html QUEDE EN LA RAÍZ DE NGINX
+COPY --from=build /app/dist/CinemaUVEG/browser /usr/share/nginx/html
 
-# 4. Copiamos TU nginx.conf
+# Tu configuración de Nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
