@@ -14,7 +14,7 @@ RUN npm run build
 FROM nginx:alpine
 # Copiar el build compilado al directorio de Nginx
 # (Si tu carpeta en dist tiene otro nombre, ajústalo aquí)
-COPY --from=build /app/dist/cinema-uveg/browser /usr/share/nginx/html
+COPY --from=build /app/dist/CinemaUVEG/browser /usr/share/nginx/html
 
 # Copiar configuración personalizada de Nginx para el ruteo de Angular
 COPY nginx.conf /etc/nginx/conf.d/default.conf
